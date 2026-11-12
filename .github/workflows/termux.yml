@@ -40,7 +40,7 @@ jobs:
       - name: Build
         run: |
           docker exec -u system termux bash -c 'git clone --branch ${{ inputs.tag }} --depth 1 --single-branch https://github.com/UMSKT/UMSKT'
-          docker exec -u system termux bash -c 'cd /data/data/com.termux/files/home/UMSKT/build && cmake .. -DOPENSSL_CRYPTO_LIBRARY=/data/data/com.termux/files/usr/lib/libcrypto.so -DOPENSSL_SSL_LIBRARY=/data/data/com.termux/files/usr/lib/libssl.so && make'
+          docker exec -u system termux bash -c 'cd /data/data/com.termux/files/home/UMSKT/build && cmake .. -DOPENSSL_CRYPTO_LIBRARY=/data/data/com.termux/files/usr/lib/libcrypto.so -DOPENSSL_SSL_LIBRARY=/data/data/com.termux/files/usr/lib/libssl.so -DCMAKE_POLICY_VERSION_MINIMUM=3.5 && make'
 
       - name: Test
         run: | 
