@@ -1,0 +1,12 @@
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    assignees:
+      - "0nix210"
+    groups:
+      github-actions-updates:
+        patterns:
+          - "*"
