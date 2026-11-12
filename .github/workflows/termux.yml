@@ -9,6 +9,8 @@ on:
         default: ""
 
 jobs:
+  permissions:
+      contents: write 
   build:
     strategy:
       matrix:
