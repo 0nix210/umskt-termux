@@ -13,18 +13,18 @@ jobs:
     strategy:
       matrix:
         include:
-          - arch: 386
+          - arch: i686
             runner: ubuntu-latest
-            image: termux/termux-docker:386
-          - arch: amd64
+            image: termux/termux-docker:i686
+          - arch: x86_64
             runner: ubuntu-latest
-            image: termux/termux-docker:amd64
-          - arch: arm64
+            image: termux/termux-docker:x86_64
+          - arch: aarch64
             runner: ubuntu-26.04-arm
-            image: termux/termux-docker:arm64
+            image: termux/termux-docker:aarch64
           - arch: armv7
             runner: ubuntu-26.04-arm
-            image: termux/termux-docker:arm/v7
+            image: termux/termux-docker:arm
     runs-on: ${{ matrix.runner }}
 
     steps:
