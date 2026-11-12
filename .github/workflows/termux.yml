@@ -36,21 +36,23 @@ jobs:
 
       - name: Start Termux container
         run: |
-          docker create --name termux --privileged \
-            -v "$PWD":/root/umskt -w /root/umskt \
-            ${{ matrix.image }} tail -f /dev/null
+          docker run -d --name termux \
+            -v "$PWD":/data/data/com.termux/files/home/umskt \
+            -w /data/data/com.termux/files/home/umskt \
+            --entrypoint tail \
+            ${{ matrix.image }} -f /dev/null
           docker start termux
           docker exec termux bash -c 'pkg update && pkg upgrade -y && pkg install -y build-essential cmake git openssl zlib zip'
 
       - name: Build
         run: |
-          docker exec termux bash -c 'cd /root/umskt && cmake .. && make'
+          docker exec termux bash -c 'cd /data/data/com.termux/files/home/umskt && cmake .. && make'
 
       - name: Test
         run: |
-          docker exec termux bash -c 'cd /root/umskt/build && ./umskt -b 2C -c 365 -s 069420,999999 -v'
-          docker exec termux bash -c 'cd /root/umskt/build && ./umskt -b 5A -c 640 -s 069420,999999 -v'
-          docker exec termux bash -c 'cd /root/umskt/build && ./umskt -i 253286028742154311079061239762245184619981623171292574'
+          docker exec termux bash -c 'cd /data/data/com.termux/files/home/umskt/build && ./umskt -b 2C -c 365 -s 069420,999999 -v'
+          docker exec termux bash -c 'cd /data/data/com.termux/files/home/umskt/build && ./umskt -b 5A -c 640 -s 069420,999999 -v'
+          docker exec termux bash -c 'cd /data/data/com.termux/files/home/umskt/build && ./umskt -i 253286028742154311079061239762245184619981623171292574'
 
       - name: Package
         run: |
