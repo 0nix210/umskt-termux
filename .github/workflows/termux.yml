@@ -39,11 +39,11 @@ jobs:
 
       - name: Build
         run: |
-          docker exec -u system termux bash -c 'git clone https://github.com/UMSKT/UMSKT/archive/refs/tags/${{ inputs.tag }}.zip'
+          docker exec -u system termux bash -c 'git clone --branch ${{ inputs.tag }} --depth 1 --single-branch https://github.com/UMSKT/UMSKT'
           docker exec -u system termux bash -c 'cd /data/data/com.termux/files/home/UMSKT/build && cmake .. && make'
 
       - name: Test
-        run: |
+        run: | 
           docker exec -u system termux bash -c 'cd /data/data/com.termux/files/home/UMSKT/build && ./umskt -b 2C -c 365 -s 069420,999999 -v'
           docker exec -u system termux bash -c 'cd /data/data/com.termux/files/home/UMSKT/build && ./umskt -b 5A -c 640 -s 069420,999999 -v'
           docker exec -u system termux bash -c 'cd /data/data/com.termux/files/home/UMSKT/build && ./umskt -i 253286028742154311079061239762245184619981623171292574'
