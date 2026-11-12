@@ -9,9 +9,9 @@ on:
         default: ""
 
 jobs:
-  permissions:
-      contents: write 
   build:
+    permissions:
+      contents: write 
     strategy:
       matrix:
         include:
