@@ -39,7 +39,6 @@ jobs:
           docker run -d --name termux \
             -v "$PWD":/data/data/com.termux/files/home/umskt \
             -w /data/data/com.termux/files/home/umskt \
-            --entrypoint tail \
             ${{ matrix.image }} sleep infinity
           docker start termux
           docker exec -u system termux bash -c 'pkg update && pkg upgrade -y && pkg install -y build-essential cmake git openssl zlib zip'
