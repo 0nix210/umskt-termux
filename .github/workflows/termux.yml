@@ -32,7 +32,6 @@ jobs:
       - name: Start Termux container
         run: |
           docker run -d --name termux \
-            -v "$PWD":/data/data/com.termux/files/home \
             -w /data/data/com.termux/files/home \
             ${{ matrix.image }} sleep infinity
           docker start termux
